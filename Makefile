@@ -1,7 +1,7 @@
 NAME= philo
 CC= cc
 FLAGS= -Wall -Wextra -Werror -g3 -pthread #-fsanitize=thread 
-FILES= eat.c init.c main.c parse.c print.c routine.c routine_utils.c setter_getter.c time.c
+FILES= eat.c init.c main.c parse.c routine.c routine_utils.c setter_getter.c supervise.c time.c
 OBJS= $(FILES:.c=.o)
 
 all: $(NAME)

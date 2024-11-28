@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Moon <Moon@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: imatek <imatek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 13:16:13 by imatek            #+#    #+#             */
-/*   Updated: 2024/11/28 03:00:17 by Moon             ###   ########.fr       */
+/*   Updated: 2024/11/28 15:17:38 by imatek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_data
 	long			ready;
 	long			nb_philo;
 	long			must_eat;
-	long			full;
+	long			all_full;
 	pthread_t		supervise;
 	pthread_mutex_t	*fork_mutex;
 	pthread_mutex_t	data_mutex;
@@ -49,6 +49,7 @@ typedef struct s_philo
 	pthread_mutex_t	*right_fork;
 	pthread_mutex_t	last_meal_mutex;
 	struct s_data	*data;
+	long			full;
 }					t_philo;
 
 /// INIT ///
@@ -64,9 +65,10 @@ int					ft_parse(char **av);
 void				ft_print(t_philo *philo, char *str);
 
 /// ROUTINE ///
-int				ft_eat(t_philo *philo);
+int					ft_eat(t_philo *philo);
 void				ft_thread(t_data *data);
-int	ft_solo_philo(t_philo *philo);
+void					ft_solo_philo(t_philo *philo);
+void				*ft_supervise(void *s);
 
 /// SETTER_GETTER ///
 long				ft_getter(pthread_mutex_t *mutex, long *variable);
@@ -75,5 +77,6 @@ void				ft_setter(pthread_mutex_t *mutex, long *variable, long new);
 /// TIME ///
 long				ft_gettime(void);
 void				ft_usleep(t_philo *philo, long time);
-
+void				ft_take_forks(t_philo *philo, pthread_mutex_t *fork1,
+						pthread_mutex_t *fork2);
 #endif
