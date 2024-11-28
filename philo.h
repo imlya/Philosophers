@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imatek <imatek@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Moon <Moon@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 13:16:13 by imatek            #+#    #+#             */
-/*   Updated: 2024/11/20 12:57:27 by imatek           ###   ########.fr       */
+/*   Updated: 2024/11/28 03:00:17 by Moon             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ typedef struct s_data
 	long			ready;
 	long			nb_philo;
 	long			must_eat;
+	long			full;
 	pthread_t		supervise;
 	pthread_mutex_t	*fork_mutex;
-	pthread_mutex_t	ready_mutex;
-	pthread_mutex_t	dead_mutex;
+	pthread_mutex_t	data_mutex;
 	pthread_mutex_t	print_mutex;
 	struct s_philo	*philo;
 }					t_data;
@@ -39,14 +39,12 @@ typedef struct s_data
 typedef struct s_philo
 {
 	long			position;
-	long			full;
 	long			nb_eat;
 	long			last_meal;
 	long			time_to_die;
 	long			time_to_eat;
 	long			time_to_sleep;
 	pthread_t		thread;
-	pthread_mutex_t	full_mutex;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
 	pthread_mutex_t	last_meal_mutex;
@@ -66,8 +64,9 @@ int					ft_parse(char **av);
 void				ft_print(t_philo *philo, char *str);
 
 /// ROUTINE ///
-void				ft_eat(t_philo *philo);
+int				ft_eat(t_philo *philo);
 void				ft_thread(t_data *data);
+int	ft_solo_philo(t_philo *philo);
 
 /// SETTER_GETTER ///
 long				ft_getter(pthread_mutex_t *mutex, long *variable);

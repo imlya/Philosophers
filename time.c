@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imatek <imatek@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Moon <Moon@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 19:00:31 by imatek            #+#    #+#             */
-/*   Updated: 2024/11/19 19:07:08 by imatek           ###   ########.fr       */
+/*   Updated: 2024/11/28 03:37:28 by Moon             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_usleep(t_philo *philo, long time)
 	start_time = ft_gettime();
 	while (ft_gettime() - start_time < time)
 	{
-		if (ft_getter(&philo->data->dead_mutex, &philo->data->dead))
+		if (ft_getter(&philo->data->data_mutex, &philo->data->dead))
 			return ;
 		elapsed_time = ft_gettime() - start_time;
 		remaining_time = time - elapsed_time;

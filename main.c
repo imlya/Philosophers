@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imatek <imatek@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Moon <Moon@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:02:24 by imatek            #+#    #+#             */
-/*   Updated: 2024/11/20 12:53:31 by imatek           ###   ########.fr       */
+/*   Updated: 2024/11/28 03:26:38 by Moon             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,10 @@ void	ft_destroy_mutex(t_data *data)
 	while (++i < data->nb_philo)
 	{
 		pthread_mutex_destroy(&data->fork_mutex[i]);
-		pthread_mutex_destroy(&data->philo[i].last_meal_mutex);
-		pthread_mutex_destroy(&data->philo[i].full_mutex);
 	}
-	pthread_mutex_destroy(&data->ready_mutex);
-	pthread_mutex_destroy(&data->dead_mutex);
+	pthread_mutex_destroy(&data->data_mutex);
 	pthread_mutex_destroy(&data->print_mutex);
+	pthread_mutex_destroy(&data->philo->last_meal_mutex);
 	free(data->fork_mutex);
 }
 
@@ -38,11 +36,11 @@ int	main(int ac, char **av)
 		return (NULL, printf("malloc data error\n"), -1);
 	memset(data, 0, sizeof(t_data));
 	if (ac < 5 || ac > 6)
-		return (printf("Error : Too many/few args\n"), -1);
+		return (free(data), printf("Error : Too many/few args\n"), -1);
 	if (!ft_parse(av) || !ft_check_digit(*av))
 		return (free(data), printf("parse error\n"), -1);
 	if (!ft_init_data(data, ac, av) || !ft_init_philo(data, av))
-		return (free(data->philo), free(data), printf("init error\n"), -1);
+		return (free(data), printf("init error\n"), -1);
 	ft_thread(data);
 	ft_destroy_mutex(data);
 	free(data->philo);

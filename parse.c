@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imatek <imatek@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Moon <Moon@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:15:36 by imatek            #+#    #+#             */
-/*   Updated: 2024/11/20 14:55:54 by imatek           ###   ########.fr       */
+/*   Updated: 2024/11/28 03:33:11 by Moon             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ int	ft_parse(char **av)
 	if (ft_atol(av[1]) <= 0 || ft_atol(av[1]) > 200)
 		return (0);
 	if (ft_atol(av[2]) < 60 || ft_atol(av[3]) < 60 || ft_atol(av[4]) < 60)
+		return (0);
+	if (av[5] && ft_atol(av[5]) <= 0)
 		return (0);
 	return (1);
 }
