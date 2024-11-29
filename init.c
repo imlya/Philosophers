@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Moon <Moon@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: imatek <imatek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:04:33 by imatek            #+#    #+#             */
-/*   Updated: 2024/11/28 03:24:54 by Moon             ###   ########.fr       */
+/*   Updated: 2024/11/29 13:00:28 by imatek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,15 @@ int	ft_init_mutex(t_data *data)
 
 int	ft_init_data(t_data *data, int ac, char **av)
 {
+	int	i;
+
 	data->nb_philo = ft_atol(av[1]);
 	data->philo = malloc(sizeof(t_philo) * data->nb_philo);
 	if (!data->philo)
 		return (NULL, printf("malloc philo error\n"));
+	i = -1;
+	while (++i < data->nb_philo)
+		memset(&data->philo[i], 0, sizeof(t_philo));
 	if (ac == 5)
 		data->must_eat = -1;
 	else if (ac == 6)
@@ -57,7 +62,7 @@ int	ft_init_philo(t_data *data, char **av)
 		data->philo[i].left_fork = &data->fork_mutex[i];
 		data->philo[i].right_fork = &data->fork_mutex[data->philo[i].position
 			% data->nb_philo];
-		pthread_mutex_init(&data->philo[i].last_meal_mutex, NULL);
+		pthread_mutex_init(&data->philo[i].philo_mutex, NULL);
 	}
 	return (1);
 }

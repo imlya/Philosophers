@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Moon <Moon@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: imatek <imatek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 19:00:31 by imatek            #+#    #+#             */
-/*   Updated: 2024/11/28 03:37:28 by Moon             ###   ########.fr       */
+/*   Updated: 2024/11/29 11:41:11 by imatek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_usleep(t_philo *philo, long time)
 		else
 		{
 			while (ft_gettime() - start_time < time)
-				;
+				usleep(10);
 		}
 	}
 	return ;

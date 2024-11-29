@@ -6,7 +6,7 @@
 /*   By: imatek <imatek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 18:35:46 by imatek            #+#    #+#             */
-/*   Updated: 2024/11/28 15:16:05 by imatek           ###   ########.fr       */
+/*   Updated: 2024/11/29 12:17:11 by imatek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,14 @@ void	*ft_routine(void *arg)
 	{
 		usleep(50);
 	}
+	if (philo->data->nb_philo == 1)
+		ft_solo_philo(philo);
 	if (philo->position % 2 == 0)
 		usleep(1500);
 	while (!ft_getter(&philo->data->data_mutex, &philo->data->dead))
 	{
-		if (philo->data->nb_philo == 1)
-		{
-			ft_solo_philo(philo);
-			break ;
-		}
 		ft_eat(philo);
-		if (ft_getter(&philo->last_meal_mutex, &philo->full))
+		if (ft_getter(&philo->philo_mutex, &philo->full))
 			break ;
 		ft_print(philo, "is sleeping\n");
 		ft_usleep(philo, philo->time_to_sleep);
@@ -52,7 +49,7 @@ void	ft_thread(t_data *data)
 	while (++i < data->nb_philo)
 	{
 		if (pthread_create(&data->philo[i].thread, NULL, &ft_routine,
-				&data->philo[i]) != 0)
+				&data->philo[i]))
 		{
 			printf("error create\n)");
 			return ;

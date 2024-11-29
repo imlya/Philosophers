@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Moon <Moon@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: imatek <imatek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:02:24 by imatek            #+#    #+#             */
-/*   Updated: 2024/11/28 03:26:38 by Moon             ###   ########.fr       */
+/*   Updated: 2024/11/29 12:38:41 by imatek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	ft_destroy_mutex(t_data *data)
 	while (++i < data->nb_philo)
 	{
 		pthread_mutex_destroy(&data->fork_mutex[i]);
+		pthread_mutex_destroy(&data->philo[i].philo_mutex);
 	}
 	pthread_mutex_destroy(&data->data_mutex);
 	pthread_mutex_destroy(&data->print_mutex);
-	pthread_mutex_destroy(&data->philo->last_meal_mutex);
 	free(data->fork_mutex);
 }
 
@@ -33,7 +33,7 @@ int	main(int ac, char **av)
 
 	data = malloc(sizeof(t_data));
 	if (!data)
-		return (NULL, printf("malloc data error\n"), -1);
+		return (NULL, printf("malloc data error\n"));
 	memset(data, 0, sizeof(t_data));
 	if (ac < 5 || ac > 6)
 		return (free(data), printf("Error : Too many/few args\n"), -1);

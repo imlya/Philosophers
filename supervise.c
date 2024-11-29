@@ -6,7 +6,7 @@
 /*   By: imatek <imatek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 12:26:30 by imatek            #+#    #+#             */
-/*   Updated: 2024/11/28 13:57:13 by imatek           ###   ########.fr       */
+/*   Updated: 2024/11/29 11:34:02 by imatek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void	ft_check_death(t_data *data)
 	{
 		if (ft_getter(&data->data_mutex, &data->all_full))
 			break ;
-		if (ft_getter(&data->philo[i].last_meal_mutex, &data->philo[i].full))
+		if (ft_getter(&data->philo[i].philo_mutex, &data->philo[i].full))
 			continue ;
-		if ((ft_gettime() - ft_getter(&data->philo[i].last_meal_mutex,
+		if ((ft_gettime() - ft_getter(&data->philo[i].philo_mutex,
 					&data->philo[i].last_meal) > data->philo[i].time_to_die))
 		{
 			ft_print(&data->philo[i], "died\n");

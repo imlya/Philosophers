@@ -6,7 +6,7 @@
 /*   By: imatek <imatek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 13:16:13 by imatek            #+#    #+#             */
-/*   Updated: 2024/11/28 15:17:38 by imatek           ###   ########.fr       */
+/*   Updated: 2024/11/29 13:14:01 by imatek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_philo
 	pthread_t		thread;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
-	pthread_mutex_t	last_meal_mutex;
+	pthread_mutex_t	philo_mutex;
 	struct s_data	*data;
 	long			full;
 }					t_philo;
@@ -67,7 +67,7 @@ void				ft_print(t_philo *philo, char *str);
 /// ROUTINE ///
 int					ft_eat(t_philo *philo);
 void				ft_thread(t_data *data);
-void					ft_solo_philo(t_philo *philo);
+int					ft_solo_philo(t_philo *philo);
 void				*ft_supervise(void *s);
 
 /// SETTER_GETTER ///
